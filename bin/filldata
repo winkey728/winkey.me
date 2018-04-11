@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const git = require("simple-git/promise");
+const rm = require("rimraf");
+
+const cwd = process.cwd();
+const repo = "https://github.com/winkey728/blog-posts.git";
+const dir = `${cwd}/content`;
+
+if (fs.existsSync(dir)) {
+  rm.sync(dir);
+}
+
+git().clone(repo, dir);

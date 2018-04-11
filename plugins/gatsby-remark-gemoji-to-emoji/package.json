@@ -1,0 +1,14 @@
+{
+  "name": "gatsby-remark-gemoji-to-emoji",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "remark-gemoji-to-emoji": "^1.1.0"
+  }
+}
