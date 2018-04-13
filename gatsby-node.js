@@ -68,7 +68,7 @@ exports.onCreateNode = async ({ node, getNode, boundActionCreators }) => {
     if (mtime) {
       mtime = new Date(mtime.trim()).toISOString();
     } else {
-      mtime = fs.statSync(node.fileAbsolutePath).mtime;
+      mtime = fs.statSync(node.fileAbsolutePath).mtime.toISOString();
     }
 
     let slug;
