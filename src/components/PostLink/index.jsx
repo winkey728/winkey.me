@@ -25,7 +25,7 @@ const hoverShadow = 12;
 const StyledCard = EntryThumbnail.withComponent(
   class C extends Component {
     state = {
-      shadow: hoverShadow
+      shadow: defaultShadow
     };
 
     onMouseOver = () => this.setState({ shadow: hoverShadow });
@@ -73,27 +73,15 @@ const PostLink = ({
   <StyledCard>
     <CardHeader
       avatar={<StyledAvatar aria-label="Recipe">R</StyledAvatar>}
-      title={
-        <StyledLink to={`${routes.blog.path}${path}`}>
-          {title}
-        </StyledLink>
-      }
+      title={<StyledLink to={`${routes.blog.path}${path}`}>{title}</StyledLink>}
       subheader={<Datetime datetime={date} format="MMMM DD, YYYY" />}
     />
     <CardMedia style={{ height: 200 }} image={cover} />
     <CardContent>
       <Typography paragraph>{excerpt}</Typography>
-      <PostMetas
-        path={routes.category.path}
-        icon={<Apps />}
-        metas={category}
-      />
+      <PostMetas path={routes.category.path} icon={<Apps />} metas={category} />
       <VerticalSpacing />
-      <PostMetas
-        path={routes.tag.path}
-        icon={<LocalOffer />}
-        metas={tags}
-      />
+      <PostMetas path={routes.tag.path} icon={<LocalOffer />} metas={tags} />
     </CardContent>
     <CardActions>
       <Link to={`${routes.blog.path}${path}`}>
