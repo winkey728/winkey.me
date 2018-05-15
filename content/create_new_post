@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+
+print_in_color() {
+    printf "%b" \
+           "$(tput setaf "$2" 2> /dev/null)" \
+           "$1" \
+           "$(tput sgr0 2> /dev/null)"
+}
+
+print_in_yellow() {
+    print_in_color "$1" 3
+}
+
+print_in_green() {
+    print_in_color "$1" 2
+}
+
+print_in_purple() {
+    print_in_color "$1" 5
+}
+
+print_in_red() {
+    print_in_color "$1" 1
+}
+
+print_in_yellow() {
+    print_in_color "$1" 3
+}
+
+print_question() {
+    print_in_yellow "   [?] $1"
+}
+
+print_success() {
+    print_in_green "   [✔] $1\n"
+}
+
+print_error() {
+    print_in_red "   [✖] $1 $2\n"
+}
+
+print_question() {
+    print_in_yellow "   [?] $1"
+}
+
+ask() {
+    print_question "$1"
+    read -r
+}
+
+get_answer() {
+    printf "%s" "$REPLY"
+}
+
+mkd() {
+    if [ -n "$1" ]; then
+        if [ -e "$1" ]; then
+            print_error "$1 - a directory with the same name already exists!"
+            return 1
+        else
+            mkdir -p "$1"
+        fi
+    fi
+}
+
+# Get post basic messages
+
+ask "Title: "
+title="$(get_answer)"
+
+ask "Slug: "
+slug="$(get_answer)"
+
+ask "Cover: "
+cover="$(get_answer)"
+
+ask "Category: "
+category="$(get_answer)"
+
+ask "Tags (split by commas): "
+tags="$(get_answer)"
+tags=(${tags//,/ })
+
+current_date=`date -u +"%F"`
+current_datetime=`date -u +"%FT%TZ"`
+
+# Create post directory and file
+
+dir="posts/${current_date}--${slug}"
+file="${dir}/${slug}.md"
+
+mkd "$dir" || exit 1
+touch "$file"
+
+# Frontmatter
+
+function join_by {
+    local d=$1;
+    shift;
+    echo -n "$1";
+    shift;
+    printf "%s" "${@/#/$d}";
+}
+
+printf "%s" \
+"---
+title: \"${title}\"
+date: \"${current_datetime}\"
+cover: \"${cover}\"
+category: \"${category}\"
+tags: [\"$(join_by '", "' ${tags[@]})\"]
+publish: false
+---
+
+" >> "$file"
+
+printf "Done.\n"
