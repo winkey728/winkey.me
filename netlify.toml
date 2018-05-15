@@ -1,6 +1,6 @@
 [build]
   publish = "public/"
-  command = "npm run filldata && gatsby build"
+  command = "npm run filldata && gatsby build --prefix-paths"
 
 [context.develop]
-  command = "npm run filldata && gatsby build"
+  command = "gatsby build --prefix-paths"
