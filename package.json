@@ -9,10 +9,8 @@
   "license": "MIT",
   "scripts": {
     "develop": "npm run cleanup && gatsby develop",
-    "build":
-      "npm run cleanup && npm run filldata && gatsby build --prefix-paths",
+    "build": "npm run cleanup && gatsby build --prefix-paths",
     "serve": "gatsby serve",
-    "filldata": "bin/filldata",
     "cleanup": "bin/cleanup"
   },
   "dependencies": {
