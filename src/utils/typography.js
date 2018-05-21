@@ -28,6 +28,17 @@ bootstrapTheme.overrideThemeStyles = ({ rhythm }, options) => ({
   },
   "a:hover": {
     color: "#586e75"
+  },
+  "::-webkit-scrollbar": {
+    width: "8px"
+  },
+  "::-webkit-scrollbar-thumb": {
+    background: "#666",
+    borderRadius: "16px"
+  },
+  "::-webkit-scrollbar-track": {
+    background: "#ddd",
+    borderRadius: "16px"
   }
 });
 bootstrapTheme.plugins = [new CodePlugin()];
